@@ -10,7 +10,7 @@ body {
   line-height: 1.5;
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color: #031461;
   color: white;
 }
 
@@ -31,16 +31,17 @@ body {
 }
 
 .again {
-  background-color: #9c9898d2;
+  background-color: #cfdfe2;
   width: 150px;
   height: 60px;
   font-size: 20px;
+  font-weight: bold;
 }
 
 .number {
   z-index: 100;
   background-color: #cfdfe2;
-  width: 200px;
+  width: 150px;
   height: 60px;
   font-size: 40px;
   padding-top: 5px;
