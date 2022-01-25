@@ -15,34 +15,35 @@ are basically libraries that are written in Javascript that are automatically av
 */
 
 let randomNumber = Math.trunc(Math.random() * 20) + 1;
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
+
+const displayNumber = function (number) {
+  document.querySelector('.number').textContent = number;
+};
 let number = 20;
 let highScore = 0;
 document.querySelector('.check').addEventListener('click', function () {
   const input = Number(document.querySelector('.guess').value);
   if (!input) {
-    document.querySelector('.message').textContent = '⛔ No Number!';
+    displayMessage('⛔ No Number!');
   } else if (randomNumber === input) {
-    document.querySelector('.message').textContent = '🎉 You Won';
-    document.querySelector('.number').textContent = randomNumber;
+    displayMessage('🎉 Correct Number');
+    displayNumber(randomNumber);
     document.querySelector('body').style.backgroundColor = 'green';
     document.querySelector('.number').style.width = '200px';
-  } else if (input < randomNumber) {
-    if (number > 1) {
-      document.querySelector('.message').textContent = '📉 too low';
-      number--;
-      document.querySelector('.score').textContent = number;
-    } else {
-      document.querySelector('.message').textContent = '🎇 You Lost';
-      document.querySelector('.score').textContent = 0;
-      document.querySelector('body').style.backgroundColor = 'black';
+    if (number > highScore) {
+      highScore = number;
+      document.querySelector('.highscore').textContent = highScore;
     }
-  } else if (input > randomNumber) {
+  } else if (randomNumber !== input) {
     if (number > 1) {
-      document.querySelector('.message').textContent = '📈 too high';
+      displayMessage(input < randomNumber ? '📉 too low' : '📈 too high');
       number--;
       document.querySelector('.score').textContent = number;
     } else {
-      document.querySelector('.message').textContent = '🎇 You Lost';
+      displayMessage('🎇 You Lost');
       document.querySelector('.score').textContent = 0;
       document.querySelector('body').style.backgroundColor = 'black';
     }
@@ -54,11 +55,7 @@ document.querySelector('.again').addEventListener('click', function () {
   document.querySelector('body').style.backgroundColor = '#031461';
   document.querySelector('.guess').value = null;
   document.querySelector('.score').textContent = 20;
-  document.querySelector('.number').textContent = '?';
-  document.querySelector('.message').textContent = 'Start Guessing . . .';
-  if (number === 20) {
-    document.querySelector('.highscore').textContent = 0;
-  } else if (number > highScore) {
-    document.querySelector('.highscore').textContent = number;
-  }
+  displayNumber('?');
+  displayMessage('Start Guessing . . .');
+  document.querySelector('.number').style.width = '150px';
 });
